@@ -50,12 +50,12 @@ http://localhost:8080/app/data-import
   and accessible via: user: root, pwd: secret
 - you will need to have yarn (https://yarnpkg.com/), nodejs (https://nodejs.org/en/) and Go (https://golang.org/)
   installed on your system
-- clone the project and from within this target folder do the following comments in a terminal:
-  go build -o app .
-  cd client
-  yarn build
-  cd ..
-  ./app
+- clone the project and from within this target folder do the following comments in a terminal: <br>
+  go build -o app . <br>
+  cd client  <br>
+  yarn build  <br>
+  cd ..  <br>
+  ./app  <br>
 - this first builds the backend, then the client and then starts the app
 - from this moment on, it tries to connect to the database
 
@@ -87,62 +87,62 @@ by the app.
 ## Apriori Algorithm
 
 The basic idea is best explained by an example.
-Assume a store has data of purchases which contain item-ids like,
-{
-{1,2,4},
-{1,2,5,6},
-{1,5,6},
-{6,7}
-}
+Assume a store has data of purchases which contain item-ids like, <br>
+{  <br>
+{1,2,4},  <br>
+{1,2,5,6}, <br>
+{1,5,6}, <br>
+{6,7} <br> 
+}  <br>
 
 We suppose the items within an item-set are ordered ascending.
 First extract items which are deemed 'frequent', that is occurring with a frequency
 larger than a fixed value. This value is referred to as 'support'. For this example we choose a support of 2.
 
-We start of extracting all different items into an ordered list:
+We start of extracting all different items into an ordered list:<br>
 {1,2,4,5,6,7}
 
-Next we compute the frequencies for each single item:
-1: 3
-2: 2
-4: 1
-5: 2
-6: 3
-7: 1
+Next we compute the frequencies for each single item: <br>
+1: 3  <br>
+2: 2  <br>
+4: 1 <br>
+5: 2 <br>
+6: 3 <br>
+7: 1 <br>
 
-We drop all items which are below the value of support. This leaves us with:
+We drop all items which are below the value of support. This leaves us with: <br>
 {1,2,5,6}
 
 This we actually already can interpret as first set of rules. That is, starting
 with an empty list, above items have higher probability of being chosen compared to others.
-Rules:
-[] -> {1}
-[] -> {2}
-[] -> {5}
-[] -> {6}
+Rules: <br>
+[] -> {1} <br>
+[] -> {2} <br>
+[] -> {5} <br>
+[] -> {6} <br>
 
-Next, based on above items we construct all possible item lists of length 2:
-{1, 2}
-{1, 5}
-{1, 6}
-{2, 5}
-{2, 6}
-{5, 6}
+Next, based on above items we construct all possible item lists of length 2: <br>
+{1, 2} <br>
+{1, 5} <br>
+{1, 6} <br>
+{2, 5} <br>
+{2, 6} <br>
+{5, 6} <br>
 Note, how we exploit the ordering here.
 
-Then we compute frequencies of these lists as they are contained as subset in the original data set:
-{1, 2}: 2
-{1, 5}: 2
-{1, 6}: 2
-{2, 5}: 1
-{2, 6}: 1
-{5, 6}: 2
+Then we compute frequencies of these lists as they are contained as subset in the original data set: <br>
+{1, 2}: 2 <br>
+{1, 5}: 2 <br>
+{1, 6}: 2 <br>
+{2, 5}: 1 <br>
+{2, 6}: 1 <br>
+{5, 6}: 2 <br>
 
-As before we remove all item-lists which are below support:
-{1, 2}: 2
-{1, 5}: 2
-{1, 6}: 2
-{5, 6}: 2
+As before we remove all item-lists which are below support: <br>
+{1, 2}: 2 <br>
+{1, 5}: 2 <br>
+{1, 6}: 2 <br>
+{5, 6}: 2 <br>
 
 We would be tempted to extract rules like, {1} -> 2 or {5} -> 1 from that. But in order
 to ensure statistical relevance we have to observe its confidence. For the rule {1} -> 2 this
@@ -151,31 +151,31 @@ We have 2 occurrences of item '2' based on 3 occurrences of item '1' altogether.
 So in 2/3 of all cases, having '1' implies having '2'.
 One can interpret this as probability of a binary distribution and so we only are interested in
 rules which contribute to a confidence larger than 1/2.
-We compute for all rules their confidences:
-{1} -> 2: 2/3
-{1} -> 5: 2/3
-{1} -> 6: 2/3
-{5} -> 6: 2/2
-{2} -> 1: 2/2
-{5} -> 1: 2/2
-{6} -> 1: 2/3
-{6} -> 5: 2/3
+We compute for all rules their confidences: <br>
+{1} -> 2: 2/3 <br>
+{1} -> 5: 2/3 <br>
+{1} -> 6: 2/3 <br>
+{5} -> 6: 2/2 <br>
+{2} -> 1: 2/2 <br>
+{5} -> 1: 2/2 <br>
+{6} -> 1: 2/3 <br>
+{6} -> 5: 2/3 <br>
 
 All rules have confidence over 1/2 and so we would recognize them as statistical relevant.
 
 We proceed by constructing item list of length 3 the same way we have done for length 2. In detail,
-we combine all single frequent items, {1,2,5,6}, with item-list of length 2 which surpass the support:
-{1, 2, 3}: 0
-{1, 2, 5}: 1
-{1, 2, 6}: 1
-{1, 5, 6}: 2
+we combine all single frequent items, {1,2,5,6}, with item-list of length 2 which surpass the support: <br>
+{1, 2, 3}: 0  <br>
+{1, 2, 5}: 1 <br>
+{1, 2, 6}: 1 <br>
+{1, 5, 6}: 2 <br>
 
 Here we have computed the item-set's frequencies at the same time.
 As we see, only {1, 5, 6} is surpassing the support with value 2.
-We state the rules with their confidence:
-{1, 5} -> 6: 2/2
-{1, 6} -> 5: 2/2
-{5, 6} -> 1: 2/2
+We state the rules with their confidence: <br>
+{1, 5} -> 6: 2/2 <br>
+{1, 6} -> 5: 2/2 <br>
+{5, 6} -> 1: 2/2 <br>
 
 All rules have confidence larger than 1/2 and thus we would add them.
 
@@ -190,22 +190,22 @@ But then it had been contained in the list of item set with length 3 which it di
 Or in other words, any item set of length 3 which lies lexicographical before {1, 5, 6} has been verified
 with respect to its frequency and hence we do not need to re-consider when generating item sets of length 4.
 
-Our algorithm altogether has extracted the rules:
-[] -> {1}
-[] -> {2}
-[] -> {5}
-[] -> {6}
-{1} -> 2
-{1} -> 5
-{1} -> 6
-{5} -> 6
-{2} -> 1
-{5} -> 1
-{6} -> 1
-{6} -> 5
-{1, 5} -> 6: 2/2
-{1, 6} -> 5: 2/2
-{5, 6} -> 1: 2/2
+Our algorithm altogether has extracted the rules: <br>
+[] -> {1} <br>
+[] -> {2} <br>
+[] -> {5} <br>
+[] -> {6} <br>
+{1} -> 2 <br>
+{1} -> 5 <br>
+{1} -> 6 <br>
+{5} -> 6 <br>
+{2} -> 1 <br>
+{5} -> 1 <br>
+{6} -> 1 <br>
+{6} -> 5 <br>
+{1, 5} -> 6: 2/2 <br>
+{1, 6} -> 5: 2/2 <br>
+{5, 6} -> 1: 2/2 <br>
 
 Although this algorithm might appear as the most natural and correct way of extracting rules it has
 a sharp drawback: its complexity. First of all in order to compute item-set frequencies one has to
