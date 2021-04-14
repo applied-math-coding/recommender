@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    #build: .
+    image: appliedmathcoding/recommender:recommender_app
+    environment:
+      DB_HOST: mysql
+    ports:
+      - 8080:8080
+  mysql:
+    image: mysql:8.0.23
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: recommender
+    ports:
+      - 3306:3306
+

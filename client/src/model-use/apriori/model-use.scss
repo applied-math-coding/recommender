@@ -1,0 +1,18 @@
+.rule{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  & > div{
+    margin-right: 5px;
+  }
+}
+
+.recommendation{
+  display: flex;
+  margin-bottom: 5px;
+
+  & > div{
+    margin-right: 15px;
+  }
+}
