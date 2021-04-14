@@ -239,7 +239,7 @@ That is, instead of using the euclidean norm in the dominator, we take the numbe
 of purchases in which either item a or item b is involved.
 
 As an example let us consider the first and second item column:
-The inner product is given by: 1*1 + 1*1 + 1*0 + 0*0 = 2
+The inner product is given by: 1 * 1 + 1 * 1 + 1 * 0 + 0 * 0 = 2
 The number of purchases is given by: 3
 This makes the pseudo-cosine having the value: 2/3
 In other words, out of 3 purchases, 2 have contained both items.
