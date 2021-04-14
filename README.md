@@ -216,8 +216,8 @@ similar frequent item sets. In theory complexity can become almost exponential i
 ## Cosine Algorithm
 
 Let us consider the so call item-matrix:
-{
-  1, 1, 0, 1, 0, 0, 0
+{ <br>
+  1, 1, 0, 1, 0, 0, 0 <br>
   1, 1, 0, 0, 1, 1, 0
   1, 0, 0, 0, 1, 1, 0
   0, 0, 0, 0, 0, 1, 1
