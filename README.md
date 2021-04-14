@@ -218,10 +218,10 @@ similar frequent item sets. In theory complexity can become almost exponential i
 Let us consider the so call item-matrix:
 { <br>
   1, 1, 0, 1, 0, 0, 0 <br>
-  1, 1, 0, 0, 1, 1, 0
-  1, 0, 0, 0, 1, 1, 0
-  0, 0, 0, 0, 0, 1, 1
-}
+  1, 1, 0, 0, 1, 1, 0 <br>
+  1, 0, 0, 0, 1, 1, 0 <br>
+  0, 0, 0, 0, 0, 1, 1 <br>
+} <br>
 
 Each row presents a purchase and each column an item.
 So the first row {1, 1, 0, 1, 0, 0, 0} would state:
